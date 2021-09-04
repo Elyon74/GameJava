@@ -2,13 +2,18 @@ package fr;
 
 import java.awt.Color;
 import java.awt.Graphics; // On importe les librairie necessaire
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Main extends JPanel{
 
 	private final int WIDTH = 50; // Taille de chaque carrée qui compose le snake
-	
+	private Deque<Snakepart> snake = new ArrayDeque<>();
+	private int offset = 0;
+			
 	public static void main(String[] args) 
 	{
     JFrame frame = new JFrame("Snake");
@@ -22,6 +27,7 @@ public class Main extends JPanel{
 	
 	public Main() 
 	{
+		snake.add(new Snakepart(0, 0, 39)); // 39 Correspond a la direction droite en Java // On instance le Snake
 		setBackground(Color.black); // Couleur de la fenetre
 		new Thread(new Runnable()
 		{
@@ -46,16 +52,30 @@ public class Main extends JPanel{
 	protected void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
+		offset++;
+		if(offset == WIDTH)
+		{
+			
+		}
+		for(Snakepart p : snake);
 		g.setColor(Color.green); // Couleur du snake
-		g.fillRect(0, 0, WIDTH, WIDTH);
+		g.fillRect(p.x * WIDTH, p.y * WIDTH, WIDTH, WIDTH);
 	}
 	
-	class Snakepart
+	class Snakepart // On creer une class qui crée notre snake
 	{
 		public int x, y, direction;
 		public Snakepart(int x, int y, int direction)
 		{
-			
+			this.x = x;
+			this.y = y;
+			this.direction = direction;
+		}
+		
+		@Override
+		protected Object clone() throws CloneNotSupportedException
+		{
+			return new Snakepart(x, y, direction);
 		}
 	}
 }

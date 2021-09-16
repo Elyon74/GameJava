@@ -15,7 +15,11 @@ import javax.swing.JPanel;
  
 public class Main extends JPanel{
  
-    private final int WIDTH = 50;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final int WIDTH = 50;
     private Deque<SnakePart> snake = new ArrayDeque<>();
     private Point apple = new Point(0,0);
     private Random rand = new Random();
@@ -33,13 +37,11 @@ public class Main extends JPanel{
             
             @Override
             public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
                 
             }
             
             @Override
             public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
                 
             }
             
@@ -69,7 +71,6 @@ public class Main extends JPanel{
                     try {
                         Thread.sleep(1000/60l);
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -121,7 +122,6 @@ public class Main extends JPanel{
                 else
                     isGrowing = false;
             } catch (CloneNotSupportedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

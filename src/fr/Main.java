@@ -15,16 +15,15 @@ import javax.swing.JPanel;
  
 public class Main extends JPanel{
  
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final int WIDTH = 50;
     private Deque<SnakePart> snake = new ArrayDeque<>();
     private Point apple = new Point(0,0);
+    private Point apple2 = new Point(0,0);
     private Random rand = new Random();
     
     private boolean isGrowing = false;
+    private boolean isGrowing2 = false;
     private boolean gameLost = false;
     
     private int offset = 0;
@@ -47,9 +46,10 @@ public class Main extends JPanel{
             
             @Override
             public void keyPressed(KeyEvent e) {
-                panel.onKeyPressed(e.getKeyCode()); 
+                panel.onKeyPressed(e.getKeyCode());
             }
         });
+        
         frame.setContentPane(panel);
         frame.setSize(13*50, 13*50);
         frame.setResizable(false);
@@ -60,6 +60,7 @@ public class Main extends JPanel{
  
     public Main() {
         createApple();
+        createApple2();
         snake.add(new SnakePart(0, 0, 39));
         setBackground(Color.BLACK);
         new Thread(new Runnable() {
@@ -93,6 +94,21 @@ public class Main extends JPanel{
         } while(!positionAvailable);
     }
     
+    public void createApple2() {
+    	boolean positionAvailable2;
+    	do {
+    		apple2.x = rand.nextInt(12);
+    		apple2.y = rand.nextInt(12);
+    		positionAvailable2 = true;
+    		for(SnakePart p : snake) {
+    			if(p.x == apple2.x && p.y == apple2.y) {
+    				positionAvailable2 = false;
+    				break;
+    			}
+    		}
+    	} while (!positionAvailable2);
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -117,19 +133,26 @@ public class Main extends JPanel{
                     isGrowing = true;
                     createApple();
                 }
+                if(head.x == apple2.x && head.y == apple2.y) {
+                	isGrowing2 = true;
+                	createApple2();
+                }
                 if(!isGrowing)
                     snake.pollLast();
                 else
                     isGrowing = false;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
-            }
+        }
         }
         
-        g.setColor(Color.red);
+        g.setColor(Color.green);
         g.fillOval(apple.x*WIDTH + WIDTH/4, apple.y*WIDTH + WIDTH/4, WIDTH/2, WIDTH/2);
         
-        g.setColor(Color.GREEN);
+        g.setColor(Color.red);
+        g.fillOval(apple2.x*WIDTH + WIDTH/4, apple2.y*WIDTH + WIDTH/4, WIDTH/2, WIDTH/2);
+        
+        g.setColor(Color.green);
         for(SnakePart p : snake) {
             if(offset == 0) {
                 if(p != head) {
@@ -156,6 +179,33 @@ public class Main extends JPanel{
             if(Math.abs(keyCode - newDirection) != 2) {
                 newDirection = keyCode;
             }
+        }
+    }
+    
+    public void onKeyPressed1(KeyEvent key) {
+        int codeDeLaTouche = key.getKeyCode();
+        switch (codeDeLaTouche)
+        {
+    	case KeyEvent.VK_Z:
+    		if(Math.abs(codeDeLaTouche - newDirection) != 2) {
+                newDirection = key.getKeyCode();
+                }
+    		break;
+        case KeyEvent.VK_S:
+    		if(Math.abs(codeDeLaTouche - newDirection) != 2) {
+                newDirection = key.getKeyCode();
+                }
+    		break;
+        case KeyEvent.VK_Q:
+    		if(Math.abs(codeDeLaTouche - newDirection) != 2) {
+                newDirection = key.getKeyCode();
+                }
+    		break;
+        case KeyEvent.VK_D:
+    		if(Math.abs(codeDeLaTouche - newDirection) != 2) {
+                newDirection = key.getKeyCode();
+                }
+    		break;
         }
     }
     
@@ -190,5 +240,4 @@ public class Main extends JPanel{
             return new SnakePart(x, y, direction);
         }
     }
-    
 }

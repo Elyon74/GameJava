@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
- 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
  
@@ -23,8 +23,8 @@ public class Main extends JPanel{
     private Random rand = new Random();
     
     private boolean isGrowing = false;
-    private boolean isGrowing2 = false;
     private boolean gameLost = false;
+    private boolean gameWin = false;
     
     private int offset = 0;
     private int newDirection = 39;
@@ -61,7 +61,7 @@ public class Main extends JPanel{
     public Main() {
         createApple();
         createApple2();
-        snake.add(new SnakePart(0, 0, 39));
+        snake.add(new SnakePart(2, 2, 39));
         setBackground(Color.BLACK);
         new Thread(new Runnable() {
             
@@ -114,10 +114,17 @@ public class Main extends JPanel{
         super.paintComponent(g);
         
         if(gameLost) {
-            g.setColor(Color.WHITE);
+            g.setColor(Color.YELLOW);
             g.setFont(new Font("Comic Sans MS", 90, 90));
             g.drawString("Game Over", 13*50/2 - g.getFontMetrics().stringWidth("Game Over")/2, 13*50/2);
             return;
+        }
+        
+        if(gameWin) {
+        	g.setColor(Color.YELLOW);
+        	g.setFont(new Font("Comic Sans MS", 90, 90));
+        	g.drawString("You Win", 13*50/2 - g.getFontMetrics().stringWidth("You Win")/2, 13*50/2);
+        	return;
         }
         
         offset += 5;
@@ -134,7 +141,7 @@ public class Main extends JPanel{
                     createApple();
                 }
                 if(head.x == apple2.x && head.y == apple2.y) {
-                	isGrowing2 = true;
+                	isGrowing = true;
                 	createApple2();
                 }
                 if(!isGrowing)
@@ -166,6 +173,9 @@ public class Main extends JPanel{
             } else {
                 g.fillRect(p.x * WIDTH, p.y*WIDTH + ((p.direction == 38) ? -offset : offset), WIDTH, WIDTH);
             }
+        }
+        if(snake.size() == 11) {
+        	gameWin = true;
         }
         
         g.setColor(Color.WHITE);
@@ -239,5 +249,10 @@ public class Main extends JPanel{
         protected Object clone() throws CloneNotSupportedException {
             return new SnakePart(x, y, direction);
         }
+
+		public static int size() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
     }
 }

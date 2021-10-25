@@ -9,9 +9,10 @@ import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
- 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import fr.Main.SnakePart;;
  
 public class Testing extends JPanel{
@@ -51,7 +52,7 @@ public class Testing extends JPanel{
         super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Comic Sans MS", 20, 30));
-        g.drawString("Score : "+(SnakePart.size() -0), 10, 40);
-        
+        g.drawString("Nouvelle partie", 210, 200);
+        g.drawString("Quitter le jeu", 210, 300);   
     }
 }

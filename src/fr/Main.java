@@ -6,14 +6,22 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JButton;
- 
+
+import fr.Testing.MyMouse;
+
+// import java.io.IOException;
+// import javax.swing.JButton;
+// import javax.swing.JLabel;
+
 public class Main extends JPanel{
  
 	private static final long serialVersionUID = 1L;
@@ -62,6 +70,7 @@ public class Main extends JPanel{
     public Main() {
         createApple();
         createApple2();
+        new Score();
         snake.add(new SnakePart(2, 2, 39));
         setBackground(Color.BLACK);
         new Thread(new Runnable() {
@@ -252,8 +261,25 @@ public class Main extends JPanel{
         }
 
 		public static int size() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
     }
+public class Score extends JFrame{
+    	
+    	private static final long serialVersionUID = 1L;
+    	JFrame frame = new JFrame("Score");
+    	JLabel label;
+    	Score(){
+    		label = new JLabel();
+    		label.setBackground(Color.BLACK);
+            label.setBounds(90,80,130,20);
+            label.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+            add(label);
+            setSize(250,250);
+            setLayout(null);
+            setResizable(false);
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            setVisible(true);
+          }
+    	}
 }

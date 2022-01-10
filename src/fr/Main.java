@@ -125,15 +125,15 @@ public class Main extends JPanel{
         
         if(gameLost) {
             g.setColor(Color.YELLOW);
-            g.setFont(new Font("Comic Sans MS", 90, 90));
-            g.drawString("Game Over", 13*50/2 - g.getFontMetrics().stringWidth("Game Over")/2, 13*50/2);
+            g.setFont(new Font("Comic Sans MS", 45, 45));
+            g.drawString("Perdu !", 13*50/2 - g.getFontMetrics().stringWidth("Perdu !")/2, 13*50/2);
             return;
         }
         
         if(gameWin) {
         	g.setColor(Color.YELLOW);
-        	g.setFont(new Font("Comic Sans MS", 90, 90));
-        	g.drawString("You Win", 13*50/2 - g.getFontMetrics().stringWidth("You Win")/2, 13*50/2);
+        	g.setFont(new Font("Comic Sans MS", 45, 45));
+        	g.drawString("Vous avez gagnez !", 13*50/2 - g.getFontMetrics().stringWidth("Vous avez gagnez !")/2, 13*50/2);
         	return;
         }
         

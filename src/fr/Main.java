@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.Testing.MyMouse;
+// import fr.Testing.MyMouse; test
 
 // import java.io.IOException;
 // import javax.swing.JButton;
@@ -260,7 +260,7 @@ public class Main extends JPanel{
             return new SnakePart(x, y, direction);
         }
 
-		public static int size() {
+		public int size() {
 			return 0;
 		}
     }
